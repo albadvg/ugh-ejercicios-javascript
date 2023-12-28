@@ -17,6 +17,6 @@
     text-overflow: ellipsis;
 }
 
-img{
+.b-gallery__img{
     max-width: 100%;
 }
