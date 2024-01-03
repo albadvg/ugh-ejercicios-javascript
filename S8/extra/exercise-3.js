@@ -1,6 +1,3 @@
-
-
-
 const getProducts = async () => {
     try {
         let response = await fetch('http://localhost:3000/products');
@@ -35,31 +32,29 @@ const sortOrders = (orders) => {
 const paintOrders = async (orders) => {
     for(const order of orders) {
         const orderDiv$$ = document.createElement('div');
-        const orderId$$ = document.createElement('h1');
-        const orderDate$$ = document.createElement('h4');
+        orderDiv$$.classList.add('pedido');
 
-        orderId$$.textContent = `Id del pedido: ${order.id}`
-        orderDate$$.textContent = `Fecha: ${order.date}`;
-
-        orderDiv$$.appendChild(orderId$$);
-        orderDiv$$.appendChild(orderDate$$);
+        orderDiv$$.innerHTML = `
+            <h1 class="pedido__id">Id del pedido: ${order.id}</h1>
+            <h4 class="pedido__fecha">Fecha: ${order.date}</h4>
+            <ul class="pedido-productos"></ul>
+        `
+        document.body.appendChild(orderDiv$$);
 
         for(product of order.products) {
             let productInfo = await getProductInfo(product.productId);
-            console.log(productInfo);
-            const productDiv$$ = document.createElement('div');
-            const productName$$ = document.createElement('h2');
-            const productQuantity$$ = document.createElement('p');
+            const listaProductos$$ = orderDiv$$.querySelector('.pedido-productos');
 
-            productName$$.textContent = productInfo.name;
-            productQuantity$$.textContent = `Cantidad: ${product.quantity}`;
+            const productoLi$$ = document.createElement('li');
 
-            productDiv$$.appendChild(productName$$);
-            productDiv$$.appendChild(productQuantity$$);
-            orderDate$$.appendChild(productDiv$$);
+            productoLi$$.innerHTML = `
+                <h2 class="producto__nombre">${productInfo.name}</h2>
+                <p class="producto__cantidad">Cantidad: ${product.quantity}</p> 
+            `
+            listaProductos$$.appendChild(productoLi$$);
         }
 
-        document.body.appendChild(orderDiv$$);
+        
     }
 }
 

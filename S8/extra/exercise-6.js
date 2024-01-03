@@ -13,27 +13,27 @@ function paintCharacters(characters) {
         character$$.innerHTML = `
             <h2 class="char__name">${char.name}</h2>
             <img src="${char.avatar}" class="char__img">
-            <p class="char__critic">Critic: ${char.critic}</p>
-            <ul class="char-dmg">
+            <div class="char-features">
+                <p class="char__critic">Critic: ${char.critic}</p>
                 <p>Damage:</p>
-                ${char.damage.map(dmg => `<li class="char-dmg__value">${dmg}</li>`).join('')}
-            </ul>
-            <p class="char__defense">Defense: ${char.defense}</p>
-            <p class="char__vitality">Vitality: ${char.vitality}</p>
+                <ul class="char-dmg">
+                    ${char.damage.map(dmg => `<li class="char-dmg__value">${dmg}</li>`).join('')}
+                </ul>
+                <p class="char__defense">Defense: ${char.defense}</p>
+                <p class="char__vitality">Vitality: ${char.vitality}</p>
+            </div>     
         `
-
-        character$$.addEventListener('click', (e) => selectChar(e, char));
         container$$.appendChild(character$$);
+        
+        character$$.querySelector('.char__img').addEventListener('click', (e) => selectChar(e.currentTarget, char));
     });
 }
 
 const selectedChars = [];
-function selectChar(e, char) {
-    let selected;
+function selectChar(selectedImg, char) {
     if(selectedChars.length < 2) {
-        e.target.classList.contains('c-characters__item') 
-            ? selected = e.target
-            : selected = e.target.parentNode;
+        const selected = selectedImg.parentNode;
+        console.log(selected)
         selectedChars.push(char);
         selected.classList.add('selected');
     }
@@ -81,7 +81,7 @@ function calcDamage(char) {
     //aplicar defensa oponente 
     const opponent = selectedChars.find(c => c.name != char.querySelector('.char__name').textContent);
     const opponentDefense = opponent.defense;
-    totalDamage - opponentDefense;
+    totalDamage -= opponentDefense;
 
     //restar daño a vitalidad oponente
     opponent.vitality -= totalDamage;
@@ -119,7 +119,7 @@ function winGame(winner) {
     characters$$.innerHTML = '';
     const winnerName = winner.querySelector('h2').textContent;
     arena$$.innerHTML = `
-        <h1>${winnerName} ganó el juego! Yuhuuuu!!</h1>
+        <h1 class="winner-msg">${winnerName} ganó el juego! <br> Yuhuuuu!!</h1>
     `
 }
 

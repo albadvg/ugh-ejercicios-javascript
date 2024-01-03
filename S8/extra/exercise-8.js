@@ -13,7 +13,7 @@ function paintACat(cat) {
     cat$$.classList.add('b-gallery__item')
     cat$$.innerHTML = `
         <img class="b-gallery__img" src="${cat.url}">
-        <button class="b-gallery__delete">Borrar</button>
+        <button class="b-gallery__delete">X</button>
     `
     gallery$$.appendChild(cat$$);
 

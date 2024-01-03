@@ -1,0 +1,37 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::after, *::before {
+    box-sizing: inherit;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   font-family: cursive;
+}
+
+.libreta {
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.page {
+    width: calc(100% / 4 - 20px) ;
+    aspect-ratio: 5/7;
+    padding: 20px;
+    background-color: rgb(236, 216, 190);
+    border: 1px solid rgb(79, 67, 56);
+}
+
+.turn {
+    transform: rotateY(180deg);
+}   
+
+.delete-btn {
+    padding: 10px;
+}

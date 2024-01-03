@@ -53,10 +53,8 @@
     font-size: 48px;
     cursor: pointer;
     border-width: 0;
-    position: fixed;
-    bottom:24px ;
-    left: 50%;
-    transform: translateX(-50%);z-index: 1;
+    display: block;
+    margin: 0 auto;
 }
 
 img{

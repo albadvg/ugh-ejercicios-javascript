@@ -19,27 +19,24 @@ const sortNotes = (notes) => {
 }
 
 const paintNotes = (notes) => {
+    const libreta$$ = document.querySelector('.libreta');
     for (const note of notes) {
-        const div$$ = document.createElement('div');
-        const h3$$ = document.createElement('h3');
-        const h5$$ = document.createElement('h5');
-        const p$$ = document.createElement('p');
-        const deleteButton$$ = document.createElement('button');
-
-        h3$$.textContent = note.title;
-        h5$$.textContent = note.date;
-        p$$.textContent = note.description;
-        deleteButton$$.textContent = 'BORRAR';
-
-        deleteButton$$.addEventListener('click', () => div$$.remove());
-
-        div$$.appendChild(h3$$);
-        div$$.appendChild(h5$$);
-        div$$.appendChild(p$$);
-        div$$.appendChild(deleteButton$$);
-
-        document.body.appendChild(div$$);
+        const page$$ = document.createElement('div');
+        page$$.classList.add('page');
+        page$$.innerHTML = `
+            <h3>${note.title}</h3>
+            <h5>${note.date}</h5>
+            <p>${note.description}</p>
+            <button class="delete-btn">BORRAR</button>
+        `
+        libreta$$.appendChild(page$$);
+        const deleteBtn$$ = page$$.querySelector('.delete-btn');
+        deleteBtn$$.addEventListener('click', () => page$$.innerHTML = '');
     }
+}
+
+const nextPage = (current) => {
+    current.classList.add('turn');
 }
 
 const init = async () => {

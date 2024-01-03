@@ -1,5 +1,3 @@
-const filterInput$$ = document.querySelector('input');
-
 const getCharacters = async () => {
     try {
         let response = await fetch('http://localhost:3000/characters');
@@ -21,24 +19,25 @@ const getPlanets = async () => {
 }
 
 const paintPlanets = async (planets) => {
-    for (const planet of planets) {
-        const planetsDiv$$ = document.querySelector('[data-function="planets"]');
+    const planetsDiv$$ = document.querySelector('[data-function="planets"]');
+    for (const planet of planets) { 
+        console.log(planet)   
         const planetDiv$$ = document.createElement('div');
-        const planetName$$ = document.createElement('h2');
-        const planetImg$$ = document.createElement('img');
-
-        planetName$$.textContent = planet.name;
-        planetImg$$.setAttribute('src', planet.image);
-        planetImg$$.setAttribute('planetId', planet.id);
-        planetImg$$.style.width = '300px';
-
-        planetDiv$$.appendChild(planetName$$);
-        planetDiv$$.appendChild(planetImg$$);
+        planetDiv$$.classList.add('planet');
+        planetDiv$$.setAttribute('idPlanet', `${planet.id}`);
+        planetDiv$$.innerHTML= `
+            <h2 class="planet__name">${planet.name}</h2>
+            <img class="planet__img" src="${planet.image}">
+        `
         planetsDiv$$.appendChild(planetDiv$$);
 
         let planetCharacters = await getPlanetCharacters(planet.id);
-        planetImg$$.addEventListener('click', () => paintCharacters(planetCharacters));
-        filterInput$$.addEventListener('input', () => filterCharacters(filterInput$$.value, planetCharacters));
+        planetDiv$$.addEventListener('click', (e) => {
+            document.querySelectorAll('.planet').forEach(p => p.classList.remove('current'));
+            planetDiv$$.classList.add('current');
+            paintCharacters(planetCharacters, planet.id);     
+
+        });
     }   
 }
 
@@ -54,31 +53,32 @@ const getPlanetCharacters = async (planetId) => {
     
 }
 
-const paintCharacters = async (planetCharacters) => {
+const paintCharacters = async (planetCharacters, planetId) => {   
+    console.log(planetId)
     const characterGallery$$ = document.querySelector('[data-function="characters"]');
     characterGallery$$.innerHTML = '';
-    
     for(const character of planetCharacters) {
         const characterDiv$$ = document.createElement('div');
-        const characterName$$ = document.createElement('h5');
-        const characterImg$$ = document.createElement('img');
+        characterDiv$$.classList.add('character');
+        characterDiv$$.setAttribute('idPlanet', `${planetId}`);
 
-        characterName$$.textContent = character.name;
-        characterImg$$.setAttribute('src', character.avatar);
-
-        characterDiv$$.appendChild(characterName$$);
-        characterDiv$$.appendChild(characterImg$$);
+        characterDiv$$.innerHTML = ` 
+            <img class="character__img" src="${character.avatar}">
+            <h4 class="character__name">${character.name}</h4>
+        `
         characterGallery$$.appendChild(characterDiv$$);
     }
-
 }
 
-const filterCharacters = (input, charactersToFilter) => {
-    console.log(charactersToFilter);
-    let filteredCharacters = charactersToFilter.filter((char) => {
-        char.name.toLowerCase().includes(input.toLowerCase());
-    })
+const filterCharacters = (input, characters) => {
+    const currentPlanet = document.querySelector('.current').getAttribute('idPlanet');
 
+    console.log(currentPlanet);
+    console.log(input);
+    console.log(characters);
+    let filteredCharacters = characters.filter((char) => {
+        return char.idPlanet === currentPlanet
+    })
     paintCharacters(filteredCharacters);
 }
 
@@ -88,6 +88,9 @@ const init = async () => {
 
     paintPlanets(planets);
 
+    
+    const filterInput$$ = document.querySelector('input');
+    filterInput$$.addEventListener('input', () => filterCharacters(filterInput$$.value, characters));
 }
 
 init();

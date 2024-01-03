@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    margin: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    margin: 20px;
+    gap: 20px;
+}
+
+.pedido {
+    background-color: rgb(233, 219, 245);
+    padding: 20px;
+    width: calc(100% / 3);
+    border-radius: 5px;
+}
+
+.pedido-productos {
+    padding-left: 14px;
+}
+
+.producto__nombre {
+    font-size: 18px;
+    display: inline-block;
+    margin-bottom: 0;
+}

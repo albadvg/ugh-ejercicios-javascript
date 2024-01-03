@@ -1,10 +1,61 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(11, 11, 11);
+    margin: 20px;
+}
+
 .films {
-    width: 100vw;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 20px;
+}
+
+.film {
+    background-color: rgb(11, 11, 11);
+    box-shadow: 0 0 10px black;
+}
+
+.film__title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 18px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.809);
+}
+
+.film-figure {
+    position: relative;
 }
 
 .film__img {
     max-width: 100%;
+    display: block;
 }
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(rgb(11, 11, 11) 0% , rgba(11, 11, 11, 0) 100%);
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.overlay:hover{
+    opacity: 0;
+}
+

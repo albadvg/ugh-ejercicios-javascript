@@ -46,7 +46,6 @@ const checkAnswer = (e, questions) => {
     if(e.target.id === thisQuestion.correct_answer) {
         answersCounter++
     }
-    console.log(answersCounter);
 }
 
 const checkGame = () => {
@@ -55,6 +54,18 @@ const checkGame = () => {
     gameBoard$$.innerHTML = `
         <h3>Has acertado ${answersCounter} preguntas</h3>
     `
+
+    const input$$ = document.querySelector('[data-function="questions-number"]');
+    
+    setTimeout(() => {
+        input$$.value = '';
+        input$$.classList.add('input-flash');
+        setTimeout(() => {
+            input$$.classList.remove('input-flash');
+        }, 1000);
+    }, 1500)
+    
+  
 }
 
 const init = async () => {
@@ -63,7 +74,6 @@ const init = async () => {
     const checkBtn$$ = document.querySelector('[data-function="check-game"]');
 
     startBtn$$.addEventListener('click', () => getTrivia(questionsInput$$.value));
-
     checkBtn$$.addEventListener('click', checkGame);
 }
 
