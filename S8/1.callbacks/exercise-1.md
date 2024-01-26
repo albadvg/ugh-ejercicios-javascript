@@ -8,15 +8,18 @@ Ejecuta varias veces la función father y haz finalmente un console.log de numbe
 ```js
 const numbersList = [];
 
-function sum(){
+function sum(a, b){
+    return a + b;
+}
+
+function substract(a, b){
 
 }
 
-function substract(){
-
+function father(a, b, operacion){
+    let resultado = operacion(a, b);
+    numberList.push(resultado);
 }
 
-function father(){
-
-}
+father(3, 5, sum);
 ```

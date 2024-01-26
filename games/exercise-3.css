@@ -10,6 +10,11 @@
     margin: 10px;
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: .2;
+}
+
 .b-questions {
     display: flex;
     flex-direction: column;

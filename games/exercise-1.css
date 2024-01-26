@@ -1,6 +1,37 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik Mono One', monospace;
+    color: #3c3426;
+}
+
+h1{
+    font-size: 3rem;
+    margin: 0;
+}
+
+.score-attempts {
+    display: flex;
+    gap: 2rem;
+}
 .b-grid {
     display: flex;
     flex-wrap: wrap;
+    width: 500px;
+    margin: 0 auto;
 }
 
 .b-grid img {
@@ -10,3 +41,68 @@
     border-radius: 10px;
     background-color: aquamarine;
 }
+
+
+.card {
+    position: relative;
+    height: 125px;
+    width: 125px;
+    cursor: pointer;
+}
+
+.card__back,
+.card__front {
+    position: absolute;
+    top: 0;
+    transition: transform 1s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden
+}
+
+.card__back {
+    z-index: 1;
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+
+.exitViewport {
+    transition: transform .5s ease;
+    transform: translateX(100vw);
+
+}
+
+
+.congratulations {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column  ;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    color: #ed6337;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.showCongrats {
+    display: flex;
+    opacity: 1;
+}
+
+
+.congratulations__title {
+    font-size: 4rem;
+}
+
+.congratulations__subtitle {
+    font-size: 2rem;
+    max-width: 50vw;
+    text-align: center;
+}
+

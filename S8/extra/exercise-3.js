@@ -53,8 +53,6 @@ const paintOrders = async (orders) => {
             `
             listaProductos$$.appendChild(productoLi$$);
         }
-
-        
     }
 }
 

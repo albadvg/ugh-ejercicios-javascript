@@ -1,7 +1,38 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    display: inline-block;
+}
+
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+}
+
+.info {
+    display: inline-block;
+}
 
 .b-square {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border: 3px solid #000000;
     background-image: url(public/exercise-2/bg.jpg);
 }
@@ -11,8 +42,8 @@
     flex-flow: row wrap;
     justify-content: center;
     align-content: center;
-    width: 618px;
-    height: 618px;
+    width: 450px;
+    height: 450px;
 }
 
 .b-mole {
@@ -20,4 +51,7 @@
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
 }
